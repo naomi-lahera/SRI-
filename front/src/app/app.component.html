@@ -1,16 +1,13 @@
 <div class="card">
   <p-toolbar>
-    <!-- <div class="p-toolbar-group-start">
-        <button pButton icon="pi pi-plus" class="mr-2"></button>
-        <button pButton icon="pi pi-print" class="mr-2"></button>
-        <button pButton icon="pi pi-upload"></button>
-    </div> -->
-    <div class="p-toolbar-group-center">
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText placeholder="Search" />
-        </span>
-    </div>
+    <span>
+      <label for="username">Url</label>
+      <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [(ngModel)]="query" />
+      </span>
+      <p-button label="Submit" (onClick)="search()"></p-button>
+  </span>
   </p-toolbar>
 
   <p class="m-0"></p>

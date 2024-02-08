@@ -5,6 +5,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { TimelineModule } from 'primeng/timeline';
 import { DividerModule } from 'primeng/divider';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [],
@@ -16,7 +17,8 @@ import { DividerModule } from 'primeng/divider';
     ToolbarModule,
     TimelineModule,
     CardModule,
-    DividerModule
+    DividerModule,
+    ButtonModule
   ]
 })
 export class PrimeNgModule { }

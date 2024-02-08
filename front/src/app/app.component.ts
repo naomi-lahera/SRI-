@@ -3,6 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { PrimeNgModule } from './prime-ng/prime-ng.module';
 import { New } from './interfaces/new';
 import { CommonModule } from '@angular/common';
+import { SearchService } from './services/search.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +14,23 @@ import { CommonModule } from '@angular/common';
   imports: [
     RouterOutlet,
     PrimeNgModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    FormsModule
+  ],
+  providers: [
+    SearchService,
+    MessageService
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent{
+
+  constructor(private searchService: SearchService) { }
+
   title = 'front';
-  query: string = ''
+  query!: string;
   show_news: boolean = true
   news: New[] = [
     {
@@ -64,4 +77,10 @@ export class AppComponent{
     }
   ]
   
+  search() {
+    console.log('component searching for:', this.query);
+    this.searchService.search(this.query).subscribe((response: any) => {
+      this.news = response.items;
+    })
+  }
 }
