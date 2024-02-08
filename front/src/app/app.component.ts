@@ -79,8 +79,9 @@ export class AppComponent{
   
   search() {
     console.log('component searching for:', this.query);
-    this.searchService.search(this.query).subscribe((response: any) => {
-      this.news = response.items;
+    this.searchService.search(this.query).then(result => {
+      console.log('component result:', result);
+      this.news = result;
     })
   }
 }

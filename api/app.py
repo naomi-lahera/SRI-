@@ -20,7 +20,9 @@ def get_news():
     print(query)
     if query:
         print(query)
-        return jsonify([new.get_json() for new in news])
+        print('json')
+        print([new.__dict__ for new in news])
+        return jsonify([new.__dict__ for new in news])
     return jsonify({'error': 'Missing query parameter'}), 400
 
 if __name__ == '__main__':

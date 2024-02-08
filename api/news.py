@@ -5,12 +5,4 @@ class New:
         self.author = author
         self.date = date
         self.url = url
-        
-    def get_json(self):
-        return {
-            'title': self.title,
-            'summary': self.summary,
-            'author': self.author,
-            'date': self.date,
-            'url': self.url
-        }
+

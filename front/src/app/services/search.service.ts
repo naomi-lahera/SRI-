@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { New } from '../interfaces/new';
-import { firstValueFrom } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import { MessageService } from 'primeng/api';
 import { PageResult } from '../interfaces/page-result';
 
@@ -12,10 +12,16 @@ export class SearchService {
   private apiUrl = 'http://localhost:4000';
   constructor(private httpClient: HttpClient,  private messageService: MessageService) { }
 
-  search(query: string) {
+  async search(query: string) : Promise<New[]> {
     console.log('searching for:', query);
     let params = new HttpParams().set('query', query);
-    return this.httpClient.get(`${this.apiUrl}/api/search`, {params: params}); 
+    let result = await firstValueFrom(this.httpClient.get<New[]>(`${this.apiUrl}/api/search`, {params: params})).
+      then(response => {
+        console.log('result:', response);
+        return response as New[];
+    });
+    console.log('result:', result);
+    return result;
   }
 
   // async search(query: string): Promise<PageResult<New>> {
