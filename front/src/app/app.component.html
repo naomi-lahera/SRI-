@@ -1,40 +1,80 @@
-<div class="card">
-  <p-toolbar>
+
+  <!-- <p-toolbar>
+    
+  </p-toolbar> -->
+
+
+
+<!--   
+  <div class="card flex justify-content-center">
     <span>
       <label for="username">Url</label>
       <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
-        <input type="text" pInputText [(ngModel)]="query" />
+        <input type="text" pInputText [(ngModel)]="query"/>
       </span>
       <p-button label="Submit" (onClick)="search()"></p-button>
-  </span>
-  </p-toolbar>
+    </span>
 
-  <p class="m-0"></p>
-  <p-divider align="left" type="solid">
-    <b>Left</b>
+    <div *ngFor="let current_source of sources" class="card flex justify-content-center">
+      <div class="flex align-items-center">
+          <p-radioButton name={{current_source}} value={{current_source}} [(ngModel)]="source" inputId={{current_source}}></p-radioButton>
+          <label for="ingredient1" class="ml-2">{{current_source}}</label>
+      </div>
+    </div>
+  </div> -->
+
+<!--   
+<div class="card">
+  <div *ngFor="let current_source of sources" class="card flex justify-content-center">
+    <div class="flex align-items-center">
+        <p-radioButton name={{current_source}} [value]="current_source" [(ngModel)]="source" inputId={{current_source}}></p-radioButton>
+        <label for="ingredient1" class="ml-2">{{current_source}}</label>
+    </div>
+  </div>
+
+  <input type="text" pInputText [(ngModel)]="query"/>
+  <p-button label="Submit" (onClick)="search()"></p-button>
+</div> -->
+
+<p-inputGroup>
+  <p-inputGroupAddon>
+      <i class="pi pi-search"></i>
+  </p-inputGroupAddon>
+  <input pInputText placeholder="Url" [ngModel]="query" />
+  <button type="button" pButton icon="pi pi-search" (click)="search()"></button>
+</p-inputGroup>
+  
+<div class="card">
+  <div *ngIf="searchResult"> 
+    <p-divider align="center" type="solid">
+      <b>New</b>
     </p-divider>
 
-    <p class="m-0">
-    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-    voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.
-    </p>
+    <div align="center">
+      <p class="m-0">{{searchResult.base.author}}</p>
+      <p class="m-0">{{searchResult.base.summary}}</p>
+      <p class="m-0">{{searchResult.base.date}}</p>
+      <a href="https://ejemplo.com">link</a>
+    </div>
 
-  <p-divider></p-divider>
+    <p-divider align="center" type="solid">
+      <b>Asociated News</b>
+    </p-divider>
 
-  <div *ngIf="show_news" class="card"  styleClass="customized-timeline" (scroll)="true">
-    <p-timeline [value]="news" align="alternate" styleClass="customized-timeline">
-        <ng-template pTemplate="marker">
+    <div *ngIf="searchResult.associated_news" class="card"  styleClass="customized-timeline" (scroll)="true">
+      <p-timeline [value]="searchResult.associated_news" align="alternate" styleClass="customized-timeline">
+          <ng-template pTemplate="marker" let-new>
             <span class="custom-marker shadow-2">
-                <i class="pi pi-calendar-minus"></i>
+                <i class="pi pi-calendar"></i>
             </span>
-        </ng-template>
-        <ng-template pTemplate="content" let-current_new>
-            <p-card [header]="current_new.title" [subheader]="current_new.date">
-                <p [textContent]="current_new.summary"></p>
-                <a href="https://ejemplo.com">link</a>
-            </p-card>
-        </ng-template>
-    </p-timeline>
-  </div>
+          </ng-template>
+          <ng-template pTemplate="content" let-current_new>
+              <p-card [header]="current_new.title" [subheader]="current_new.date">
+                  <p [textContent]="current_new.summary"></p>
+                  <a href="https://ejemplo.com">link</a>
+              </p-card>
+          </ng-template>
+      </p-timeline>
+    </div>
 </div>
