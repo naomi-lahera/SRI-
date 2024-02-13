@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
 import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
@@ -9,13 +9,20 @@ import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { ImageModule } from 'primeng/image';
+import { AutoFocusModule } from 'primeng/autofocus';
+// import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    // CommonModule,
+    // BrowserModule,
+    // BrowserAnimationsModule
   ],
   exports: [
+    AutoFocusModule,
     MenubarModule,
     ToolbarModule,
     TimelineModule,
@@ -24,7 +31,8 @@ import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
     ButtonModule,
     RadioButtonModule,
     InputGroupModule,
-    InputGroupAddonModule
+    InputGroupAddonModule,
+    ImageModule
   ]
 })
 export class PrimeNgModule { }

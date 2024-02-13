@@ -8,6 +8,9 @@ import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { SerachResult } from './interfaces/serach-result';
 import { PrimeNGConfig } from 'primeng/api';
+import { BodyComponent } from './components/body/body.component'; 
+import { TopbarComponent } from './components/topbar/topbar.component'; 
+import { FooterComponent } from './components/footer/footer.component'; 
 
 @Component({
   selector: 'app-root',
@@ -17,7 +20,10 @@ import { PrimeNGConfig } from 'primeng/api';
     PrimeNgModule,
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BodyComponent,
+    TopbarComponent,
+    FooterComponent
   ],
   providers: [
     SearchService,
@@ -27,80 +33,17 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-
-  sources!: string[];
-
   constructor(private primengConfig: PrimeNGConfig, private searchService: SearchService) { }
   ngOnInit(): void {
     this.primengConfig.ripple = true;
-    this.searchService.get_available_authors().then(result => {
-      // console.log(result)
-      this.sources = result
-      // console.log(this.sources)
-    })
   }
 
-  title = 'front';
+  title = 'old_news';
+
   query!: string;
   total = 0;
   source!: string;
   searchResult!: SerachResult; 
-  // = 
-  // {
-  //   base:
-  //   {
-  //     title: "Title  1",
-  //     author: "Author  1",
-  //     summary: "Summary of the first news item.",
-  //     date: new Date("2024-02-08"),
-  //     url: "https://example.com/news1"
-  //   },
-  //   associated_news: 
-  // [
-  //     {
-  //       title: "Title  1",
-  //       author: "Author  1",
-  //       summary: "Summary of the first news item.",
-  //       date: new Date("2024-02-08"),
-  //       url: "https://example.com/news1"
-  //     },
-  //     {
-  //       title: "Title  2",
-  //       author: "Author  2",
-  //       summary: "Summary of the second news item.",
-  //       date: new Date( "2024-02-07"),
-  //       url: "https://example.com/news2"
-  //     },
-  //     {
-  //       title: "Title  3",
-  //       author: "Author  3",
-  //       summary: "Summary of the third news item.",
-  //       date: new Date( "2024-02-06"),
-  //       url: "https://example.com/news3"
-  //     },
-  //     {
-  //       title: "Title  4",
-  //       author: "Author  4",
-  //       summary: "Summary of the fourth news item.",
-  //       date: new Date( "2024-02-05"),
-  //       url: "https://example.com/news4"
-  //     },
-  //     {
-  //       title: "Title  5",
-  //       author: "Author  5",
-  //       summary: "Summary of the fifth news item.",
-  //       date: new Date("2024-02-04"),
-  //       url: "https://example.com/news5"
-  //     },
-  //     {
-  //       title: "Title  6",
-  //       author: "Author  6",
-  //       summary: "Summary of the sixth news item.",
-  //       date: new Date("2024-02-03"),
-  //       url: "https://example.com/news6"
-  //     }
-  //   ]
-  // };
 
   search() {
     // console.log('component searching for:', this.query);
@@ -110,14 +53,4 @@ export class AppComponent implements OnInit{
       // console.log(this.searchResult.base.date.getDate)
     })
   }
-
-  // monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  // formatDate(date: Date): string {
-  //   const day = date.getDate();
-  //   const month = this.monthNames[date.getMonth() +  1]; // JavaScript months are  0-based
-  //   const year = date.getFullYear();
-  //   console.log('date:')
-  //   console.log(`${month},${day} ${year}`)
-  //   return `${month},${day} ${year}`;
-  // }
 }
