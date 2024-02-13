@@ -3,25 +3,29 @@ import { SearchService } from '../../services/search.service';
 import { SerachResult } from '../../interfaces/serach-result';
 import { CommonModule } from '@angular/common'; 
 import { PrimeNgModule } from '../../prime-ng/prime-ng.module';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-body',
   standalone: true,
   imports: [
     CommonModule,
-    PrimeNgModule
+    PrimeNgModule,
+    FormsModule
   ],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'
 })
 export class BodyComponent {
-  sources! : string[];
+  sources : string[] = ['kjs', 'ybhnj'];
 
   constructor(private searchService: SearchService) { }
   ngOnInit(): void {
-    this.searchService.get_available_authors().then(result => {
-      this.sources = result
-    })
+    // this.searchService.get_available_authors().then(result => {
+    //   this.sources = result
+    // })
+    // console.log('result')
+    // console.log(this.sources)
   }
 
   query!: string;
@@ -90,7 +94,7 @@ export class BodyComponent {
     this.searchService.search(this.query, this.source, this.total).then(result => {
       // console.log('component result:', result);
       this.searchResult = result;
-      // console.log(this.searchResult.base.date.getDate)
+      console.log(this.searchResult.base.date.getDate)
     })
   }
 

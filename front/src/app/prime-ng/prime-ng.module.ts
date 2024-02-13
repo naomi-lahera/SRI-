@@ -9,8 +9,14 @@ import { ButtonModule } from 'primeng/button';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputGroupModule } from 'primeng/inputgroup';
 import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
 import { ImageModule } from 'primeng/image';
 import { AutoFocusModule } from 'primeng/autofocus';
+
+import { DropdownModule } from 'primeng/dropdown';
+import { ListboxModule } from 'primeng/listbox';
+
+import { KnobModule } from 'primeng/knob';
 // import { BrowserModule } from '@angular/platform-browser';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -32,7 +38,11 @@ import { AutoFocusModule } from 'primeng/autofocus';
     RadioButtonModule,
     InputGroupModule,
     InputGroupAddonModule,
-    ImageModule
+    ImageModule,
+    InputTextModule,
+    DropdownModule,
+    ListboxModule,
+    KnobModule
   ]
 })
 export class PrimeNgModule { }
