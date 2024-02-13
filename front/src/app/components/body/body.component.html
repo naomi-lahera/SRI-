@@ -1,35 +1,46 @@
-<div *ngIf="!searchResult; else elseBlock">
-    <p style="width: 800px;">
-        Welcome to Old News, we look forward to providing you with an exceptional experience. You can start your searches in the top right corner of our website.
-    </p>
-</div>
-
-<ng-template #elseBlock>
+<div>
     <div *ngIf="searchResult.associated_news.length == 0">
         <p style="width: 800px;">
-            We have find nothing
+            We have found nothing
         </p>
     </div>
 
-    <div *ngIf="searchResult.base">
-        <h1>New</h1>
-        <h2>{{searchResult.base.title}}</h2>
-        <p st>Author: {{searchResult.base.author}}</p>
-        <p>{{searchResult.base.summary}}</p>
-        <p>{{searchResult.base.date}}</p>
-        <a routerLink={{searchResult.base.url}}>Your Link Text</a>
-        <p style="margin-bottom:  0.4cm;"></p>
-    </div>
+    <div class="grid-container">
+        <div class="left-item">
+            <div class="gray-container">
+                <div class="center-item">
+                    <input class="search-input" (ngModel)="query">
+                </div>
+                <div class="right-item">
+                    <button (click)="search()">
+                        <i class="pi pi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
 
-    <div *ngIf="searchResult.associated_news">
-        <h1>Associated News</h1>
+        <div class="center-item">
+            <h1>New</h1>
+            <h2>{{searchResult.base.title}}</h2>
+            <p st>Author: {{searchResult.base.author}}</p>
+            <p>{{searchResult.base.summary}}</p>
+            <p>{{searchResult.base.date}}</p>
+            <a routerLink={{searchResult.base.url}}>link</a>
+            <p style="margin-bottom:  0.4cm;"></p>
+        </div>
+
+        <div class="right-item">
+            <div *ngIf="searchResult.associated_news">
+                <h1>Associated News</h1>
+            </div>
+            <div *ngFor="let new of searchResult.associated_news">
+                <h3>{{new.title}}</h3>
+                <p>Author: {{new.author}}</p>
+                <p>{{new.summary}}</p>
+                <p>{{new.date}}</p>
+                <a routerLink={{new.url}}>link</a>
+                <p style="margin-bottom:  0.4cm;"></p>
+            </div>
+        </div>
     </div>
-    <div *ngFor="let new of searchResult.associated_news">
-        <h3>{{new.title}}</h3>
-        <p>Author: {{new.author}}</p>
-        <p>{{new.summary}}</p>
-        <p>{{new.date}}</p>
-        <a routerLink={{new.url}}>Your Link Text</a>
-        <p style="margin-bottom:  0.4cm;"></p>
-    </div>
-</ng-template>
+</div>

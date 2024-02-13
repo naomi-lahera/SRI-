@@ -1,0 +1,21 @@
+.grid-container {
+    display: grid;
+    grid-template-columns:  1fr  1fr; /* Two equal columns */
+    gap:  0.5cm; /* Half-centimeter gap between grid items */
+  }
+
+.left-item {
+  grid-column:  1; /* Place this item in the first column */
+}
+
+.center-item{
+    grid-column: 2;
+}
+
+.right-item {
+  grid-column:  3; /* Place this item in the second column */
+  }
+
+.search-input{
+  margin-top: 40px;
+}

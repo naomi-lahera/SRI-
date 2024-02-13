@@ -11,6 +11,7 @@ import { PrimeNGConfig } from 'primeng/api';
 import { BodyComponent } from './components/body/body.component'; 
 import { TopbarComponent } from './components/topbar/topbar.component'; 
 import { FooterComponent } from './components/footer/footer.component'; 
+import { HomeComponent } from './components/home/home.component';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     BodyComponent,
     TopbarComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent
   ],
   providers: [
     SearchService,
