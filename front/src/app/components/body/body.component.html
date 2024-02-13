@@ -1,12 +1,35 @@
 <div *ngIf="!searchResult; else elseBlock">
-    <p>
-        Welcome to Old News. We hope you have a good time with us.
+    <p style="width: 800px;">
+        Welcome to Old News, we look forward to providing you with an exceptional experience. You can start your searches in the top right corner of our website.
     </p>
 </div>
 
 <ng-template #elseBlock>
-    <p-inputGroup>
-        <input type="text" pInputText placeholder="Keyword" />
-        <button type="button" pButton icon="pi pi-search" class="p-button-warning"></button>
-    </p-inputGroup>
+    <div *ngIf="searchResult.associated_news.length == 0">
+        <p style="width: 800px;">
+            We have find nothing
+        </p>
+    </div>
+
+    <div *ngIf="searchResult.base">
+        <h1>New</h1>
+        <h2>{{searchResult.base.title}}</h2>
+        <p st>Author: {{searchResult.base.author}}</p>
+        <p>{{searchResult.base.summary}}</p>
+        <p>{{searchResult.base.date}}</p>
+        <a routerLink={{searchResult.base.url}}>Your Link Text</a>
+        <p style="margin-bottom:  0.4cm;"></p>
+    </div>
+
+    <div *ngIf="searchResult.associated_news">
+        <h1>Associated News</h1>
+    </div>
+    <div *ngFor="let new of searchResult.associated_news">
+        <h3>{{new.title}}</h3>
+        <p>Author: {{new.author}}</p>
+        <p>{{new.summary}}</p>
+        <p>{{new.date}}</p>
+        <a routerLink={{new.url}}>Your Link Text</a>
+        <p style="margin-bottom:  0.4cm;"></p>
+    </div>
 </ng-template>
