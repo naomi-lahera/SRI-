@@ -2,12 +2,14 @@ import { Component } from '@angular/core';
 import { SearchService } from '../../services/search.service';
 import { SerachResult } from '../../interfaces/serach-result';
 import { CommonModule } from '@angular/common'; 
+import { PrimeNgModule } from '../../prime-ng/prime-ng.module';
 
 @Component({
   selector: 'app-body',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    PrimeNgModule
   ],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'
@@ -18,9 +20,7 @@ export class BodyComponent {
   constructor(private searchService: SearchService) { }
   ngOnInit(): void {
     this.searchService.get_available_authors().then(result => {
-      // console.log(result)
       this.sources = result
-      // console.log(this.sources)
     })
   }
 
