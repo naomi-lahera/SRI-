@@ -18,13 +18,6 @@ export class SearchService {
       .set('url', query)
       .set('total', total)
       .set('source', source);
-
-    // params.set('url', query);
-    // params.set('total', total);
-    // console.log('source')
-    // console.log('params')
-    // console.log(params.getAll)
-    // params.set('source', source)
     
     return await firstValueFrom(this.httpClient.get<SerachResult>(`${this.apiUrl}/api/search`, {params: params})).
       then(response => {

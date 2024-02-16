@@ -1,87 +1,69 @@
-<div class="grid-container">
-    <div class="left-item">
-        <div class="card flex justify-content-center" style="margin-bottom: 5px;">
-            <p-inputGroup>
-                <input type="text" pInputText placeholder="Url" (ngModel)="query"/>
-                <button type="button" pButton icon="pi pi-search" (click)="search()"></button>
-            </p-inputGroup>
-        </div>
+<!-- <p-blockUI [blocked]="isLoading"></p-blockUI> -->
 
-        <p-inputGroup>        
-    <!--<p-knob [size]="50" (ngModel)="total"></p-knob> -->
-        </p-inputGroup>
-
-        <div class="card" align="center">
-            <h2>{{searchResult.base.title}}</h2>
-            <p st>Author: {{searchResult.base.author}}</p>
-            <p>{{searchResult.base.summary}}</p>
-            <p>{{searchResult.base.date}}</p>
-            <a routerLink={{searchResult.base.url}}>link</a>
-            <p style="margin-bottom:  0.4cm;"></p>
-        </div>
-    </div>
-
-    <div class="right-item" align="center">
-        <h1>Associated News</h1>
-        <div class="card">
-            <p-timeline [value]="searchResult.associated_news" align="alternate" styleClass="customized-timeline">
-                <ng-template pTemplate="marker" let-event>
-                    <span class="custom-marker shadow-2"></span>
-                </ng-template>
-                <ng-template pTemplate="content" let-event>
-                    <p-card [header]="event.title" [subheader]="event.date">
-                        <img *ngIf="event.image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />
-                        <p>
-                            {{event.summary}}
-                        </p>
-                        <button pButton label="Read more" class="p-button-text"></button>
-                    </p-card>
-                </ng-template>
-            </p-timeline>
+<!-- <div *ngIf="isLoading">
+    <i class="pi pi-spin pi-spinner" align="center" [style]="{'width':'800px', 'height':'800px'}"></i>
+</div> -->
+<!-- *ngIf="!isLoading" -->
+<div>
+    <!-- Contenido normal del componente -->
+    <!-- [class.disabled]="isLoading" -->
+    <div class="body" [class.disabled]="isLoading">
+        <div class="grid-container">
+            <div class="left-item fixed-content">
+                <div class="card flex justify-content-center" style="margin-bottom: 5px;">
+                    <p-inputGroup [style]="{'margin-bottom':'10px'}">
+                        <input type="text" pInputText placeholder="Url" [(ngModel)]="query"/>
+                        <button type="button" pButton icon="pi pi-search" (click)="search()"></button>
+                    </p-inputGroup>
+                    <!-- <p-dropdown [options]="sources" [(ngModel)]="source" optionLabel="name" [showClear]="true" placeholder="Select a Source"></p-dropdown> -->
+                    <div>
+                        <p [style]="{'width':'400px', 'height':'10px'}">Select a Source</p>
+                    </div>
+                    <div class="flex flex-wrap gap-3" [style]="{'margin-left':'10px'}">
+                        <div *ngFor="let source of sources" class="field-checkbox">
+                            <p-radioButton [inputId]="source" name="category" [value]="source" [(ngModel)]="selectedSource"></p-radioButton>
+                            <label [for]="source" class="ml-2" [style]="{'margin-left':'5px'}">{{ sourceName(source) }}</label>
+                        </div>
+                    </div>
+                </div>
+            
+                <p-inputGroup>        
+            <!--<p-knob [size]="50" (ngModel)="total"></p-knob> -->
+                </p-inputGroup>
+            
+                <h3>New</h3>
+                <div class="card" align="center">
+                    <h2>{{searchResult.base.title}}</h2>
+                    <p st>Author: {{searchResult.base.author}}</p>
+                    <p>{{searchResult.base.summary}}</p>
+                    <p>{{searchResult.base.date}}</p>
+                    <a routerLink={{searchResult.base.url}}>link</a>
+                    <p style="margin-bottom:  0.4cm;"></p>
+                </div>
+            </div>
+        
+            <div class="right-item scrollable-content" align="center">
+                <div *ngIf="searchResult.associated_news.length == 0">
+                    <h1 class="associated-news-header">We have no news about this topic</h1>
+                </div>
+                <div *ngIf="searchResult.associated_news.length != 0">
+                    <h1 class="associated-news-header">Associated News</h1>
+                    <div class="card">
+                        <p-timeline [value]="searchResult.associated_news" align="alternate" styleClass="customized-timeline">
+                            <ng-template pTemplate="marker" let-event>
+                                <span class="custom-marker shadow-2"></span>
+                            </ng-template>
+                            <ng-template pTemplate="content" let-event>
+                                <p-card [header]="event.title" [subheader]="event.date">
+                                    <img *ngIf="event.image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />
+                                    <p>{{event.summary}}</p>
+                                    <a routerLink={{event.url}}>link</a>
+                                </p-card>
+                            </ng-template>
+                        </p-timeline>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- <div>
-    <div *ngIf="searchResult.associated_news.length == 0">
-        <p style="width: 800px;">
-            We have found nothing
-        </p>
-    </div>
-
-    <div class="grid-container">
-        <div class="left-item">
-           <div class="layout-topbar-menu" [ngClass]="'layout-topbar-menu-mobile-active'">
-                <div>
-                    <input type="text" pInputText placeholder="Url" style="width: 250px; height: fit-content;"/>
-                </div>
-                <button class="p-link layout-topbar-button" [routerLink]="['/search-body']">
-                    <i class="pi pi-search"></i>
-                    <span>Profile</span>
-                </button>
-            </div>
-        
-            <h1>New</h1>
-            <h2>{{searchResult.base.title}}</h2>
-            <p st>Author: {{searchResult.base.author}}</p>
-            <p>{{searchResult.base.summary}}</p>
-            <p>{{searchResult.base.date}}</p>
-            <a routerLink={{searchResult.base.url}}>link</a>
-            <p style="margin-bottom:  0.4cm;"></p>
-        </div>
-
-        <div class="right-item">
-            <div *ngIf="searchResult.associated_news">
-                <h1>Associated News</h1>
-            </div>
-            <div *ngFor="let new of searchResult.associated_news">
-                <h3>{{new.title}}</h3>
-                <p>Author: {{new.author}}</p>
-                <p>{{new.summary}}</p>
-                <p>{{new.date}}</p>
-                <a routerLink={{new.url}}>link</a>
-                <p style="margin-bottom:  0.4cm;"></p>
-            </div>
-        </div>
-    </div>
-</div> -->

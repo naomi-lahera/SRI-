@@ -16,6 +16,7 @@ body {
     min-height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
 }
 
 a {
@@ -34,9 +35,9 @@ a {
     justify-content: space-between;
     padding: 7rem 2rem 2rem 4rem;
     transition: margin-left 0.05s;
+    overflow: hidden;
 }
 
 .layout-main {
     flex: 1 1 auto;
 }
-

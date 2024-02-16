@@ -1,12 +1,17 @@
+.body {
+  overflow-y: hidden; /* Oculta la barra de desplazamiento vertical */
+}
+
 .grid-container {
     display: grid;
     grid-template-columns:  30fr  70fr; /* Two equal columns */
     gap:  0cm; /* Half-centimeter gap between grid items */
+    height:  475px;
   }
 
+  
 .left-item {
   grid-column:  1; /* Place this item in the first column */
-  
 }
 
 .right-item {
@@ -77,4 +82,18 @@
         font-weight: medium;
         display: block;
     }
+}
+
+.scrollable-content {
+  overflow-y: auto; /* Habilita el desplazamiento vertical */
+  height:  100%; /* Asegúrate de que el contenedor tenga altura suficiente para permitir el desplazamiento */
+}
+
+.associated-news-header{
+  margin-top: 0px;
+}
+
+.body.disabled {
+  pointer-events: none;
+  opacity:  0.5;
 }
