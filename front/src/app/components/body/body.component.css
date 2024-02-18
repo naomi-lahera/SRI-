@@ -12,6 +12,7 @@
   
 .left-item {
   grid-column:  1; /* Place this item in the first column */
+  overflow-y: auto;
 }
 
 .right-item {

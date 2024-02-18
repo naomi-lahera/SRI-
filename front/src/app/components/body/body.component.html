@@ -10,7 +10,7 @@
     <div class="body" [class.disabled]="isLoading">
         <div class="grid-container">
             <div class="left-item fixed-content" align="left">
-                <div class="card flex justify-content-center" style="margin-bottom: 5px;">
+                <div class="card flex justify-content-center" style="margin-bottom: 0px;">
                     <p-inputGroup [style]="{'margin-bottom':'5px'}">
                         <input [required]="true" type="text" pInputText placeholder="Url" [(ngModel)]="query"/>
                         <button [disabled]="!query || !selectedSource" type="button" pButton icon="pi pi-search" (click)="search()"></button>
@@ -32,19 +32,21 @@
                     </div>
                 </div>
             
-                <p-inputGroup>        
-            <!--<p-knob [size]="50" (ngModel)="total"></p-knob> -->
-                </p-inputGroup>
+                <!-- <p-inputGroup>        
+                <p-knob [size]="50" (ngModel)="total"></p-knob>
+                </p-inputGroup> -->
                 
                 <div *ngIf="searchResult">
                     <!-- <h3>New</h3> -->
                     <div class="card" align="center">
-                        <h2 *ngIf="searchResult.base.title.length > 0">{{searchResult.base.title}}</h2>
+                        <h3 [style]="{'margin-bottom': '5px', 'margin-top':'0px'}" *ngIf="searchResult.base.title.length > 0">{{searchResult.base.title}}</h3>
                         <p *ngIf="searchResult.base.author.length > 0">Author: {{searchResult.base.author}}</p>
                         <p *ngIf="searchResult.base.summary.length > 0">{{searchResult.base.summary}}</p>
-                        <p *ngIf="searchResult.base.date.length > 0">{{searchResult.base.date}}</p>
-                        <a routerLink={{searchResult.base.url}}>link</a>
-                        <p style="margin-bottom:  0.4cm;"></p>
+                        <p *ngIf="searchResult.base.date.length > 0">date: {{searchResult.base.date}}</p>
+                        <!-- <p-button label="Navegar" [link]="true" href="https://www.example.com"></p-button> -->
+                        <a href={{searchResult.base.url}} target="_blank">Visit the website</a>
+                        <!-- <a routerLink={{searchResult.base.url}}>link</a> -->
+                        <!-- <p style="margin-bottom:  0.4cm;"></p> -->
                     </div>
                     <!-- <div class="card">
                         <p-card *ngIf="searchResult.base" [header]="searchResult.base.title" [subheader]=" searchResult.base.date.length > 0 ? searchResult.base.date : '' ">
@@ -71,7 +73,7 @@
                                 <p-card *ngIf="event.title.length > 0" [header]="event.title" [subheader]=" event.date.length > 0 ? event.date : '' ">
                                     <p *ngIf="event.author.length > 0">Author: {{event.author}}</p>
                                     <p>{{event.summary}}</p>
-                                    <a routerLink={{event.url}}>link</a>
+                                    <a href={{event.url}} target="_blank">Visita el sitio web</a>
                                 </p-card>
                             </ng-template>
                         </p-timeline>
