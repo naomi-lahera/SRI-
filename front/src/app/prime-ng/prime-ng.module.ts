@@ -19,6 +19,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { KnobModule } from 'primeng/knob';
 import { FormsModule } from '@angular/forms'; 
 import { BlockUIModule } from 'primeng/blockui';
+import { TableModule } from 'primeng/table';
 
 // import { BrowserModule } from '@angular/platform-browser';
 // import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -47,7 +48,8 @@ import { BlockUIModule } from 'primeng/blockui';
     ListboxModule,
     KnobModule,
     FormsModule,
-    BlockUIModule
+    BlockUIModule,
+    TableModule
   ]
 })
 export class PrimeNgModule { }

@@ -21,7 +21,7 @@ export class SearchService {
     
     return await firstValueFrom(this.httpClient.get<SerachResult>(`${this.apiUrl}/api/search`, {params: params})).
       then(response => {
-        console.log('result:', response);
+        console.log('result:', response.base);
         return response as SerachResult;
     })
       .catch(() => {
@@ -31,7 +31,7 @@ export class SearchService {
             title: '', 
             author: '', 
             summary: '', 
-            date: new Date(), 
+            date: '', 
             url: ''}, 
           associated_news: []
         };

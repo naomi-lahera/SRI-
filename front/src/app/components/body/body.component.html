@@ -1,28 +1,33 @@
 <!-- <p-blockUI [blocked]="isLoading"></p-blockUI> -->
 
-<!-- <div *ngIf="isLoading">
-    <i class="pi pi-spin pi-spinner" align="center" [style]="{'width':'800px', 'height':'800px'}"></i>
-</div> -->
+<div *ngIf="isLoading">
+    <i class="pi pi-spin pi-spinner" align="center"></i>
+</div>
 <!-- *ngIf="!isLoading" -->
 <div>
     <!-- Contenido normal del componente -->
     <!-- [class.disabled]="isLoading" -->
     <div class="body" [class.disabled]="isLoading">
         <div class="grid-container">
-            <div class="left-item fixed-content">
+            <div class="left-item fixed-content" align="left">
                 <div class="card flex justify-content-center" style="margin-bottom: 5px;">
-                    <p-inputGroup [style]="{'margin-bottom':'10px'}">
-                        <input type="text" pInputText placeholder="Url" [(ngModel)]="query"/>
-                        <button type="button" pButton icon="pi pi-search" (click)="search()"></button>
+                    <p-inputGroup [style]="{'margin-bottom':'5px'}">
+                        <input [required]="true" type="text" pInputText placeholder="Url" [(ngModel)]="query"/>
+                        <button [disabled]="!query || !selectedSource" type="button" pButton icon="pi pi-search" (click)="search()"></button>
                     </p-inputGroup>
                     <!-- <p-dropdown [options]="sources" [(ngModel)]="source" optionLabel="name" [showClear]="true" placeholder="Select a Source"></p-dropdown> -->
-                    <div>
+                    <!-- <div>
                         <p [style]="{'width':'400px', 'height':'10px'}">Select a Source</p>
-                    </div>
-                    <div class="flex flex-wrap gap-3" [style]="{'margin-left':'10px'}">
-                        <div *ngFor="let source of sources" class="field-checkbox">
-                            <p-radioButton [inputId]="source" name="category" [value]="source" [(ngModel)]="selectedSource"></p-radioButton>
-                            <label [for]="source" class="ml-2" [style]="{'margin-left':'5px'}">{{ sourceName(source) }}</label>
+                    </div> -->
+                    <div class='card'>
+                        <h3 [style]="{'margin-bottom': '5px', 'margin-top':'0px'}">Select a Source</h3>
+                        <div class="sources">
+                            <div class="flex flex-wrap gap-3" [style]="{'margin-left':'5px'}">
+                                <div *ngFor="let source of sources" class="field-checkbox">
+                                    <p-radioButton [required]="true" [inputId]="source" name="category" [value]="source" [(ngModel)]="selectedSource"></p-radioButton>
+                                    <label [for]="source" class="ml-2" [style]="{'margin-left':'5px'}">{{ sourceName(source) }}</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -30,23 +35,32 @@
                 <p-inputGroup>        
             <!--<p-knob [size]="50" (ngModel)="total"></p-knob> -->
                 </p-inputGroup>
-            
-                <h3>New</h3>
-                <div class="card" align="center">
-                    <h2>{{searchResult.base.title}}</h2>
-                    <p st>Author: {{searchResult.base.author}}</p>
-                    <p>{{searchResult.base.summary}}</p>
-                    <p>{{searchResult.base.date}}</p>
-                    <a routerLink={{searchResult.base.url}}>link</a>
-                    <p style="margin-bottom:  0.4cm;"></p>
+                
+                <div *ngIf="searchResult">
+                    <!-- <h3>New</h3> -->
+                    <div class="card" align="center">
+                        <h2 *ngIf="searchResult.base.title.length > 0">{{searchResult.base.title}}</h2>
+                        <p *ngIf="searchResult.base.author.length > 0">Author: {{searchResult.base.author}}</p>
+                        <p *ngIf="searchResult.base.summary.length > 0">{{searchResult.base.summary}}</p>
+                        <p *ngIf="searchResult.base.date.length > 0">{{searchResult.base.date}}</p>
+                        <a routerLink={{searchResult.base.url}}>link</a>
+                        <p style="margin-bottom:  0.4cm;"></p>
+                    </div>
+                    <!-- <div class="card">
+                        <p-card *ngIf="searchResult.base" [header]="searchResult.base.title" [subheader]=" searchResult.base.date.length > 0 ? searchResult.base.date : '' ">
+                            <p *ngIf="searchResult.base">Author: {{searchResult.base.author}}</p>
+                            <p>{{searchResult.base}}</p>
+                            <a routerLink={{searchResult.base}}>link</a>
+                        </p-card>
+                    </div> -->
                 </div>
             </div>
         
             <div class="right-item scrollable-content" align="center">
-                <div *ngIf="searchResult.associated_news.length == 0">
+                <div *ngIf="!searchResult || searchResult.associated_news.length == 0">
                     <h1 class="associated-news-header">We have no news about this topic</h1>
                 </div>
-                <div *ngIf="searchResult.associated_news.length != 0">
+                <div *ngIf="searchResult && searchResult.associated_news.length != 0">
                     <h1 class="associated-news-header">Associated News</h1>
                     <div class="card">
                         <p-timeline [value]="searchResult.associated_news" align="alternate" styleClass="customized-timeline">
@@ -54,8 +68,8 @@
                                 <span class="custom-marker shadow-2"></span>
                             </ng-template>
                             <ng-template pTemplate="content" let-event>
-                                <p-card [header]="event.title" [subheader]="event.date">
-                                    <img *ngIf="event.image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + event.image" [alt]="event.name" width="200" class="shadow-2" />
+                                <p-card *ngIf="event.title.length > 0" [header]="event.title" [subheader]=" event.date.length > 0 ? event.date : '' ">
+                                    <p *ngIf="event.author.length > 0">Author: {{event.author}}</p>
                                     <p>{{event.summary}}</p>
                                     <a routerLink={{event.url}}>link</a>
                                 </p-card>

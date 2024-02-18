@@ -97,3 +97,7 @@
   pointer-events: none;
   opacity:  0.5;
 }
+
+.sources{
+  height:  200px;
+}
